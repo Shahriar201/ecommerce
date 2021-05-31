@@ -3,116 +3,500 @@
 @section('content')
 	
 	@include('frontend.layouts.slider')
-	<!-- Header Section -->
 	
-	<!-- Slider Section -->
-	
-	<!-- Mission and Vision -->
-	<section class="mission_vision">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<h3 style="padding-top: 15px;padding-bottom: 5px;border-bottom: 1px solid #000000; width: 70%;">Mission and Vision</h3>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<img src="{{ asset ('public/upload/mission_images/'.$mission->image)}}" style="border: 1px solid #ddd;padding: 5px;background: #EFEE03;border-radius: 30px;float: left;margin-right: 10px;">
-					<p style="text-align: justify;"><strong>Mission </strong>{{ $mission->title }}</p>
-				</div>
-				
-				<div class="col-md-6">
-					<img src="{{ asset ('public/upload/vision_images/'.$vision->image)}}" style="border: 1px solid #ddd;padding: 5px;background: #EFEE03;border-radius: 30px;float: left;margin-right: 10px;">
-					<p style="text-align: justify;"><strong>Vision </strong>{{ $vision->title }}</p>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- News and Events -->
-	<section class="nesw_events" style="background: #ddd">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3" style="padding-top: 15px;">
-					<h3 style="border-bottom: 1px solid #000;width: 85%">News and Events</h3>
-				</div>
-				<div class="col-md-9" style="padding-top: 15px;">
-					<table class="table table-striped table-bordered table-hover table-md table-warning">
-						<thead class="thead-dark">
-							<tr>
-								<th>SL</th>
-								<th>Date</th>
-								<th>Image</th>
-								<th>Title</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
+	<!-- Product -->
+    <section class="bg0 p-t-23 p-b-140">
+        <div class="container">
+            <div class="flex-w flex-sb-m p-b-52">
+                <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+						All Products
+					</button>
 
-							@foreach($news_events as $key => $news)
-								<tr>
-									<td>{{ $key+1 }}</td>
-									<td width="15%">{{ date('d-m-Y', strtotime($news->date)) }}</td>
-									<td><img src="{{ asset ('public/upload/news_images/'.$news->image)}}" style="width: 200px; height: 120px;"></td>
-									<td>{{ $news->short_title }}</td>
-									<td><a href="{{ route('news.event.details', $news->id) }}" class="btn btn-info">Details</a></td>
-								</tr>
-							@endforeach
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+						Women
+					</button>
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Services -->
-	<section class="our_services">
-		<div class="container" style="padding-top: 15px">
-			<!-- Nav tab -->
-			<ul class="nav nav-tabs">
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+						Men
+					</button>
 
-				@php
-					$count_service = 0;
-				@endphp
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
+						Bag
+					</button>
 
-				@foreach ($services as $service)	
-					<li class="nav-item">
-						<a href="#{{ $service->id }}" class="nav-link 
-						@if ($count_service == 0) { active } @endif" data-toggle="tab">{{ $service->short_title }}</a>
-					</li>
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
+						Shoes
+					</button>
 
-					@php
-						$count_service++
-					@endphp
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
+						Watches
+					</button>
+                </div>
 
-				@endforeach
+                <div class="flex-w flex-c-m m-tb-10">
+                    <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+                        <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+                        <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i> Filter
+                    </div>
 
-			</ul>
+                    <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                        <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                        <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i> Search
+                    </div>
+                </div>
 
-			<!-- Tab Content -->
-			<div class="tab-content">
+                <!-- Search product -->
+                <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                    <div class="bor8 dis-flex p-l-15">
+                        <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
 
-				@php
-					$count_service = 0;
-				@endphp
+                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+                    </div>
+                </div>
 
-				@foreach ($services as $service)
-					
-				<div id="{{ $service->id }}" class="container tab-pane 
-					@if($count_service == 0) { active } @endif">
-					<h3>{{ $service->short_title }}</h3>
-					<p>{{ $service->long_title }}</p>
-				</div>
+                <!-- Filter -->
+                <div class="dis-none panel-filter w-full">
+                    <div class="wrap-filter flex-w w-full" style="background-color: #858585;">
+                        <div>
+                            <div style="padding: 20px; font-size: 25px; color: #fff">
+                                Brands
+                            </div>
+                            <div style="padding: 0px 20px 20px 20px;">
+                                <a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" href="" class="filter-link stext-106 trans-04" style="color: #fff">
+				                    Bangladeshi
+				                </a>
+                                <a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" href="" class="filter-link stext-106 trans-04" style="color: #fff">
+				                    Malayshian
+				                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-				@php
-					$count_service++
-				@endphp
-				
-				@endforeach
+            <div class="row isotope-grid">
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-01.jpg" alt="IMG-PRODUCT">
 
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
 
-			</div>
-		</div>
-	</section>
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Esprit Ruffle Shirt
+								</a>
+
+                                <span class="stext-105 cl3">
+									$16.64
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-02.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Herschel supply
+								</a>
+
+                                <span class="stext-105 cl3">
+									$35.31
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-03.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Only Check Trouser
+								</a>
+
+                                <span class="stext-105 cl3">
+									$25.50
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-04.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Classic Trench Coat
+								</a>
+
+                                <span class="stext-105 cl3">
+									$75.00
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-05.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Front Pocket Jumper
+								</a>
+
+                                <span class="stext-105 cl3">
+									$34.75
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-06.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Vintage Inspired Classic 
+								</a>
+
+                                <span class="stext-105 cl3">
+									$93.20
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-07.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Shirt in Stretch Cotton
+								</a>
+
+                                <span class="stext-105 cl3">
+									$52.66
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-08.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Pieces Metallic Printed
+								</a>
+
+                                <span class="stext-105 cl3">
+									$18.96
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item shoes">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-09.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Converse All Star Hi Plimsolls
+								</a>
+
+                                <span class="stext-105 cl3">
+									$75.00
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-10.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Femme T-Shirt In Stripe
+								</a>
+
+                                <span class="stext-105 cl3">
+									$25.85
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-11.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Herschel supply 
+								</a>
+
+                                <span class="stext-105 cl3">
+									$63.16
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-12.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Herschel supply
+								</a>
+
+                                <span class="stext-105 cl3">
+									$63.15
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-13.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									T-Shirt with Sleeve
+								</a>
+
+                                <span class="stext-105 cl3">
+									$18.49
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-14.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Pretty Little Thing
+								</a>
+
+                                <span class="stext-105 cl3">
+									$54.79
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-15.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Mini Silver Mesh Watch
+								</a>
+
+                                <span class="stext-105 cl3">
+									$86.85
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ asset('public/frontend') }}/images/product-16.jpg" alt="IMG-PRODUCT">
+
+                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Add to Card
+							</a>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Square Neck Back
+								</a>
+
+                                <span class="stext-105 cl3">
+									$29.64
+								</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 	<!-- Footer Part -->
 @endsection

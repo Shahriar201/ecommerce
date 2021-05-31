@@ -44,37 +44,12 @@ class FrontendController extends Controller
         return view('frontend.single_pages.contact-us', $data);
     }
 
-    public function newsDetails($id){
-        $data['logo'] = Logo::first();
-        $data['contact'] = Contact::first();
-        
-        $data['news'] = NewsEvent::find($id);
-
-        return view('frontend.single_pages.news-event-details', $data);
-    }
-
-    public function mission(){
-        $data['logo'] = Logo::first();
-        $data['contact'] = Contact::first();
-        $data['mission'] = Mission::first();
-
-        return view('frontend.single_pages.mission', $data);
-    }
-
-    public function vision(){
-        $data['logo'] = Logo::first();
-        $data['contact'] = Contact::first();
-        $data['vision'] = Vision::first();
-
-        return view('frontend.single_pages.vision', $data);
-    }
-
-    public function newsEvents(){
+    public function shoppingCart(){
         $data['logo'] = Logo::first();
         $data['contact'] = Contact::first();
         $data['news_events'] = NewsEvent::orderBy('id', 'desc')->get();
 
-        return view('frontend.single_pages.news-events', $data);
+        return view('frontend.single_pages.shopping-card', $data);
     }
 
     public function store(Request $request){

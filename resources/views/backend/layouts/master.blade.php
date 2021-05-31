@@ -44,7 +44,11 @@
     {{-- Date Picker --}}
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    
+
+    {{-- Sweet alert --}}
+    <script src="{{ asset('public/backend') }}/sweetalert/sweetalert.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{ asset('public/backend') }}/sweetalert/sweetalert.css">
+
 
 </head>
 
@@ -255,6 +259,7 @@
         });
     </script>
 
+    {{-- Sweet alert js --}}
     <script type="text/javascript">
         $(function(){
             $(document).on('click', '#delete', function(e){
@@ -282,6 +287,51 @@
         });
 
     </script>
+
+    {{-- Another sweet alert by post method --}}
+    {{-- <script>
+        $(document).on('click', '#delete', function(){
+            var actionTo = $(this).attr('href');
+            var token = $(this).attr('data-token');
+            var id = $(this).attr('data-id');
+            swal({
+                title: "Are you sure?",
+                type: "success",
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger',
+                confirmButtonText: 'Yes',
+                cancleButtonText: "No",
+                closeOnConfirm: false,
+                closeOnCancle: false
+            }
+            function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url:actionTo,
+                        type: 'post',
+                        data: {id:id, token:token},
+                        success: function (data) {
+                            swal({
+                                title: "Deleted!",
+                                type: "success"
+                            },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    $('.' + id).fadeOut();
+                                }
+                            }
+                            );
+                        }
+                    });
+                } else {
+                    swal("Cancelled", "", "error");
+                }
+            }
+            );
+            return false;
+        });
+    </script> --}}
+
 
     <script type="text/javascript">
         $(document).ready(function(){

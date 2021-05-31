@@ -18,11 +18,8 @@
 Route::get('/', 'Frontend\FrontendController@index');
 Route::get('about-us', 'Frontend\FrontendController@aboutUs')->name('about.us');
 Route::get('contact-us', 'Frontend\FrontendController@contactUs')->name('contact.us');
-Route::get('/news-events/details/{id}', 'Frontend\FrontendController@newsDetails')->name('news.event.details');
-Route::get('/our/mission', 'Frontend\FrontendController@mission')->name('our.mission');
-Route::get('/our/vision', 'Frontend\FrontendController@vision')->name('our.vision');
-Route::get('/news/events', 'Frontend\FrontendController@newsEvents')->name('our.news.events');
 Route::post('/contact/store', 'Frontend\FrontendController@store')->name('contact.store');
+Route::get('/shopping/cart', 'Frontend\FrontendController@shoppingCart')->name('shopping.cart');
 
 Auth::routes();
 

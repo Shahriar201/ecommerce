@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Popularsoft E-Commerce</title>
+    <title>Furniture E-Commerce</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="{{ asset('public/frontend') }}/images/icons/favicon.png" />

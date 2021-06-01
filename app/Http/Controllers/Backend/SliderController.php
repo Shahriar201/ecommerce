@@ -66,8 +66,8 @@ class SliderController extends Controller
 
     }
 
-    public function delete($id){
-        $slider = Slider::find($id);
+    public function delete(Request $request){
+        $slider = Slider::find($request->id);
         if(file_exists('public/upload/slider_images/' . $slider->image) AND ! empty($slider->image)){
             unlink('public/upload/slider_images/' . $slider->image);
         }

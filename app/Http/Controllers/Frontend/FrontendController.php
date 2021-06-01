@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 use App\Model\Logo;
 use App\Model\Slider;
 use App\Model\Contact;
-use App\Model\Mission;
-use App\Model\Vision;
-use App\Model\NewsEvent;
-use App\Model\Service;
 use App\Model\About;
 use App\Model\Communicate;
 use Mail;
@@ -21,10 +17,6 @@ class FrontendController extends Controller
         $data['logo'] = Logo::first();
         $data['sliders'] = Slider::all();
         $data['contact'] = Contact::first();
-        $data['mission'] = Mission::first();
-        $data['vision'] = Vision::first();
-        $data['news_events'] = NewsEvent::orderBy('id', 'desc')->get();
-        $data['services'] = Service::all();
 
         return view('frontend.layouts.home', $data);
     }
@@ -47,7 +39,6 @@ class FrontendController extends Controller
     public function shoppingCart(){
         $data['logo'] = Logo::first();
         $data['contact'] = Contact::first();
-        $data['news_events'] = NewsEvent::orderBy('id', 'desc')->get();
 
         return view('frontend.single_pages.shopping-card', $data);
     }

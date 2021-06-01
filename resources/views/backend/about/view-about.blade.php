@@ -65,7 +65,7 @@
                                 <tbody>
                                     @foreach ($allData as $key => $about)
 
-                                        <tr>
+                                        <tr class= {{ $about->id }}>
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $about->description }}</td>
 
@@ -75,10 +75,8 @@
 
                                                     </i>
                                                 </a>
-                                                <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('abouts.delete', $about->id) }}">
-                                                    <i class="fa fa-trash">
-
-                                                    </i>
+                                                <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('abouts.delete') }}" data-token="{{ csrf_token() }}" data-id="{{ $about->id }}">
+                                                    <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>

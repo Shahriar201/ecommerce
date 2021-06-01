@@ -61,7 +61,7 @@
                                 <tbody>
                                     @foreach ($allData as $key => $logo)
 
-                                    <tr>
+                                    <tr class="{{ $logo->id }}">
                                         <td>{{ $key+1 }}</td>
                                         <td><img src="{{ (!empty($logo->image))?url('public/upload/logo_images/'.$logo->image):url('public/upload/no_image.jpg') }}" width="120px" height="130px"></td>
                 
@@ -71,7 +71,7 @@
 
                                                 </i>
                                             </a>
-                                            <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('logos.delete', $logo->id) }}">
+                                            <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('logos.delete') }}" data-token="{{ csrf_token() }}" data-id="{{ $logo->id }}">
                                                 <i class="fa fa-trash">
 
                                                 </i>

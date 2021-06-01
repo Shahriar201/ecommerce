@@ -60,7 +60,7 @@
                                 <tbody>
                                     @foreach ($allData as $key => $slider)
 
-                                    <tr>
+                                    <tr class="{{ $slider->id }}">
                                         <td>{{ $key+1 }}</td>
                                         <td><img src="{{ (!empty($slider->image))?url('public/upload/slider_images/'.$slider->image):url('public/upload/no_image.jpg') }}" width="120px" height="130px"></td>
                                         <td>{{ $slider->short_title }}</td>
@@ -72,7 +72,7 @@
 
                                                 </i>
                                             </a>
-                                            <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('sliders.delete', $slider->id) }}">
+                                            <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('sliders.delete') }}" data-token="{{ csrf_token() }}" data-id="{{ $slider->id }}">
                                                 <i class="fa fa-trash">
 
                                                 </i>

@@ -59,7 +59,7 @@
                                 <tbody>
                                     @foreach ($allData as $key => $communicate)
 
-                                        <tr>
+                                        <tr class="{{ $communicate->id }}">
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $communicate->name }}</td>
                                             <td>{{ $communicate->email }}</td>
@@ -68,7 +68,7 @@
                                             <td>{{ $communicate->msg }}</td>
 
                                             <td>
-                                                <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route ('contacts.communicate.delete', $communicate->id) }}">
+                                                <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route ('contacts.communicate.delete') }}" data-token="{{ csrf_token() }}" data-id="{{ $communicate->id }}">
                                                     <i class="fa fa-trash">
 
                                                     </i>

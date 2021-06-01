@@ -62,8 +62,8 @@ class ContactController extends Controller
 
     }
 
-    public function delete($id){
-        $contact = Contact::find($id);
+    public function delete(Request $request){
+        $contact = Contact::find($request->id);
         $contact->delete();
 
         return redirect()->route('contacts.view')->with('success', 'Data deleted successfully');

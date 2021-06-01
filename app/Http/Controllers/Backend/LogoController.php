@@ -35,7 +35,7 @@ class LogoController extends Controller
         }
         $data->save();
 
-        return redirect()->route('logos.view')->with('success', 'Logo inserted successfully');
+        return redirect()->route('logos.view')->with('success', 'Data inserted successfully');
     }
 
     public function edit($id){
@@ -62,8 +62,8 @@ class LogoController extends Controller
 
     }
 
-    public function delete($id){
-        $logo = Logo::find($id);
+    public function delete(Request $request){
+        $logo = Logo::find($request->id);
         if(file_exists('public/upload/logo_images/' . $logo->image) AND ! empty($logo->image)){
             unlink('public/upload/logo_images/' . $logo->image);
         }

@@ -29,7 +29,7 @@ class AboutController extends Controller
         $data->created_by = Auth::user()->id;
         $data->save();
 
-        return redirect()->route('abouts.view')->with('success', 'About Us inserted successfully');
+        return redirect()->route('abouts.view')->with('success', 'Data inserted successfully');
     }
 
     public function edit($id){
@@ -49,8 +49,8 @@ class AboutController extends Controller
 
     }
 
-    public function delete($id){
-        $about = About::find($id);
+    public function delete(Request $request){
+        $about = About::find($request->id);
         $about->delete();
 
         return redirect()->route('abouts.view')->with('success', 'Data deleted successfully');

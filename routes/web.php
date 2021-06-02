@@ -105,6 +105,16 @@ Route::group(['middleware'=>'auth'], function(){
         Route::post('/delete', 'Backend\CategoryController@delete')->name('categories.delete');        
     });
     
+    Route::prefix('brands')->group(function(){
+    
+        Route::get('/view', 'Backend\BrandController@view')->name('brands.view');
+        Route::get('/add', 'Backend\BrandController@add')->name('brands.add');
+        Route::post('/store', 'Backend\BrandController@store')->name('brands.store'); 
+        Route::get('/edit/{id}', 'Backend\BrandController@edit')->name('brands.edit');
+        Route::post('/update/{id}', 'Backend\BrandController@update')->name('brands.update');
+        Route::post('/delete', 'Backend\BrandController@delete')->name('brands.delete');        
+    });
+    
 
 });
 

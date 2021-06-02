@@ -9,13 +9,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Manage Color</h1>
+                    <h1 class="m-0">Manage Size</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Color</li>
+                        <li class="breadcrumb-item active">Size</li>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -39,14 +39,14 @@
                         <div class="card-header">
                             <h3>
                                 @if (isset($editData))
-                                    Edit Color
+                                    Edit Size
                                     
                                     @else
-                                    Add Color
+                                    Add Size
 
                                 @endif
-                                <a class="btn btn-success float-right btn-sm" href="{{ route('colors.view') }}">
-                                    <i class="fa fa-list"></i>Color List</a>
+                                <a class="btn btn-success float-right btn-sm" href="{{ route('sizes.view') }}">
+                                    <i class="fa fa-list"></i>Size List</a>
                             </h3>
                         </div>
 
@@ -54,14 +54,14 @@
                         <div class="card-body">
 
                         {{-- User add form --}}
-                        <form method="post" action="{{ (@$editData)?route('colors.update', $editData->id): route('colors.store') }}" id="myForm" enctype="multipart/form-data">
+                        <form method="post" action="{{ (@$editData)?route('sizes.update', $editData->id): route('sizes.store') }}" id="myForm" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-row">
                                
                                 <div class="form-group col-md-8">
-                                    <label>Color Name</label>
-                                    <input type="text" name="name" value="{{ (@$editData->name) }}" class="form-control form-control-sm" placeholder="Write Color Name">
+                                    <label>Size</label>
+                                    <input type="text" name="name" value="{{ (@$editData->name) }}" class="form-control form-control-sm" placeholder="Write Size">
                                     <font color="red">{{ ($errors->has('name'))?($errors->first('name')): '' }}</font>
                                 </div>
 

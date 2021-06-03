@@ -29,6 +29,10 @@
     <link rel="stylesheet" href="{{ asset('public/backend/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('public/backend/plugins/summernote/summernote-bs4.min.css') }}">
+    {{-- Select2 --}}
+    <link rel="stylesheet" href="{{ asset('public/backend') }}/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('public/backend') }}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 
     <!-- DataTables -->
     <link rel="stylesheet"
@@ -264,7 +268,8 @@
     <!-- jquery-validation -->
     <script src="{{ asset('public/backend') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="{{ asset('public/backend') }}/plugins/jquery-validation/additional-methods.min.js"></script>
-
+    {{-- Select2 --}}
+    <script src="{{ asset('public/backend') }}/plugins/select2/js/select2.full.min.js"></script>
     <script>
         $(function() {
             $("#example1").DataTable();
@@ -372,6 +377,13 @@
             });
         });
 
+    </script>
+
+    {{-- Select2 --}}
+    <script type="text/javascript">
+        $(function () {
+            $('.select2').select2();
+        })
     </script>
 
 </body>

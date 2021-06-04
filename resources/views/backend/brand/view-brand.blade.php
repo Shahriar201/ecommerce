@@ -64,6 +64,9 @@
 
                                 <tbody>
                                     @foreach ($allData as $key => $brand)
+                                    @php
+                                        $count_brand = App\Model\Product::where('brand_id', $brand->id)->count();
+                                    @endphp
 
                                         <tr class= {{ $brand->id }}>
                                             <td>{{ $key+1 }}</td>
@@ -75,9 +78,11 @@
 
                                                     </i>
                                                 </a>
+                                                @if($count_brand<1)
                                                 <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('brands.delete') }}" data-token="{{ csrf_token() }}" data-id="{{ $brand->id }}">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
+                                                @endif()
                                             </td>
                                         </tr>
                                         

@@ -62,7 +62,9 @@
 
                                 <tbody>
                                     @foreach ($allData as $key => $color)
-
+                                    @php
+                                        $count_color = App\Model\ProductColor::where('color_id', $color->id)->count();
+                                    @endphp
                                         <tr class= {{ $color->id }}>
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $color->name }}</td>
@@ -73,9 +75,11 @@
 
                                                     </i>
                                                 </a>
+                                                @if($count_color<1)
                                                 <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('colors.delete') }}" data-token="{{ csrf_token() }}" data-id="{{ $color->id }}">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
+                                                @endif
                                             </td>
                                         </tr>
                                         

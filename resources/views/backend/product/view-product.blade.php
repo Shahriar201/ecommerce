@@ -60,7 +60,7 @@
                                             <th>Product Name</th>
                                             <th>Price</th>
                                             <th>Image</th>
-                                            <th width="10%">Action</th>
+                                            <th width="14%">Action</th>
                                         </tr>
                                     </thead>
 
@@ -81,9 +81,11 @@
                                                 <td>
                                                     <a title="Edit" id="edit" class="btn btn-sm btn-primary"
                                                         href="{{ route('products.edit', $product->id) }}">
-                                                        <i class="fa fa-edit">
-
-                                                        </i>
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a title="Details" id="details" class="btn btn-sm btn-success"
+                                                        href="{{ route('products.details', $product->id) }}">
+                                                        <i class="fa fa-eye"></i>
                                                     </a>
                                                     <a title="Delete" id="delete" class="btn btn-sm btn-danger"
                                                         href="{{ route('products.delete') }}"

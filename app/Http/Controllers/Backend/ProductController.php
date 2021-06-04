@@ -14,7 +14,7 @@ use App\Model\ProductSize;
 use App\Model\ProductSubImage;
 use DB;
 use Auth;
-use App\Http\Requests\SizeRequest;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -98,25 +98,125 @@ class ProductController extends Controller
     }
 
     public function edit($id){
-        $editData = Size::find($id);
-
-        return view('backend.size.add-size', compact('editData'));
+        $data['editData'] = Product::find($id);
+        $data['categories'] = Category::all();
+        $data['brands'] = Brand::all();
+        $data['colors'] = Color::all();
+        $data['sizes'] = Size::all();
+        $data['color_array'] = ProductColor::select('color_id')->where('product_id', $data['editData']->id)->orderBy('id', 'asc')->get()->toArray();
+        $data['size_array'] = ProductSize::select('size_id')->where('product_id', $data['editData']->id)->orderBy('id', 'asc')->get()->toArray();
+    
+        return view('backend.product.add-product', $data);
     }
 
-    public function update(SizeRequest $request, $id){
-        $data = Size::find($id);
-        $data->name = $request->name;
-        $data->updated_by = Auth::user()->id;
-        $data->save();
+    public function update(ProductRequest $request, $id){
+        DB::transaction(function () use($request, $id){
+            $this->validate($request,[
+                'color_id' => 'required',
+                'size_id' => 'required'
+            ]);
+            $product = Product::find($id);
+            $product->category_id = $request->category_id;
+            $product->brand_id = $request->brand_id;
+            $product->name = $request->name;
+            $product->short_desc = $request->short_desc;
+            $product->long_desc = $request->long_desc;
+            $product->price = $request->price;
+            $img = $request->file('image');
+            if ($img) {
+                $imgName = date('YmdHi').$img->getClientOriginalName();
+                $img->move('public/upload/product_images/', $imgName);
+                if (file_exists('public/upload/product_images/'.$product->image) AND ! empty($product->image)) {
+                    unlink('public/upload/product_images/'.$product->image);
+                }
+                $product['image'] = $imgName;
+            }
+            if ($product->save()) {
+                
+                // product-sub-image-table-data-update 
+                $files = $request->sub_image;
+                if (!empty($files)) {
+                    $subImage = ProductSubImage::where('product_id', $id)->get()->toArray();
+                    foreach ($subImage as $value) {
+                        if (!empty($value)) {
+                            unlink('public/upload/product_images/product_sub_images'.$value['sub_image']);
+                        }
+                    }
+                    ProductSubImage::where('product_id', $id)->delete();
+                }
+                if (!empty($files)) {
+                    foreach ($files as $file) {
+                        $imgName = date('YmdHi').$file->getClientOriginalName();
+                        $file->move(public_path('upload/product_images/product_sub_images'), $imgName);
+                        $subimage['sub_image'] = $imgName;
 
-        return redirect()->route('sizes.view')->with('success', 'Data updated successfully');
+                        $subimage = new ProductSubImage();
+                        $subimage->product_id = $product->id;
+                        $subimage->sub_image = $imgName;
+                        $subimage->save();
+                    }
+                }
+                // Color table data update
+                $colors = $request->color_id;
+                if (!empty($colors)) {
+                    ProductColor::where('product_id', $id)->delete();
+                }
+                if (!empty($colors)) {
+                    foreach ($colors as $color) {
+                        $mycolor = new ProductColor();
+                        $mycolor->product_id = $product->id;
+                        $mycolor->color_id = $color;
+                        $mycolor->save();
+                    }
+                }
+                // Size table data update
+                $sizes = $request->size_id;
+                if (!empty($sizes)) {
+                    ProductSize::where('product_id', $id)->delete();
+                }
+                if (!empty($sizes)) {
+                    foreach ($sizes as $size) {
+                        $mysize = new ProductSize();
+                        $mysize->product_id = $product->id;
+                        $mysize->size_id = $size;
+                        $mysize->save();
+                    }
+                }
+            } else {
+                return redirect()->back()->with('error', 'Sorry! Data not Updated');
+            }
+            $product->save();
+        });
+        
+        return redirect()->route('products.view')->with('success', 'Data Updated successfully');
 
     }
 
     public function delete(Request $request){
-        $size = Size::find($request->id);
-        $size->delete();
+        $product = Product::find($request->id);
+        if (file_exists('public/upload/product_images/'.$product->image) AND ! empty($product->image)) {
+            unlink('public/upload/product_images/'.$product->image);
+        }
 
-        return redirect()->route('colors.view')->with('success', 'Data deleted successfully');
+        $subImage = ProductSubImage::where('product_id', $product->id)->get()->toArray();
+        if (!empty($subImage)) {
+            foreach ($subImage as $value) {
+                if (!empty($value)) {
+                    unlink('public/upload/product_images/product_sub_images/'.$value['sub_image']);
+                }
+            }
+        }
+        ProductSubImage::where('product_id', $product->id)->delete();
+        ProductColor::where('product_id', $product->id)->delete();
+        ProductSize::where('product_id', $product->id)->delete();
+        $product->delete();
+
+        return redirect()->route('products.view')->with('success', 'Data deleted successfully');
+    }
+
+    public function details($id){
+        $product = Product::find($id);
+
+        return view('backend.product.product-details', compact('product'));
     }
 }

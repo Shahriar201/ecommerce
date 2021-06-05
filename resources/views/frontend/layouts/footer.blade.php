@@ -7,7 +7,7 @@
                     Contact Us
                 </h4>
                 <p class="stext-107 cl7 hov-cl1 trans-04" style="font-size: 15px;">
-                    Address: Notun bazar,Gulshan-Dhaka, &nbsp; Cell: 01928511049 , &nbsp; Email: asadullahkpi@gmail.com
+                    Address: {{ $contact->address }}, &nbsp; Cell: {{ $contact->mobile_no }} , &nbsp; Email: {{ $contact->email }}
                 </p>
             </div>
 
@@ -17,11 +17,11 @@
                 </h4>
 
                 <ul class="social">
-                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li class="facebook"><a href="{{ $contact->facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li class="google-plus"><a href="{{ $contact->twitter }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <li class="youtube"><a href="{{ $contact->youtube }}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                    <li class="twitter"><a href="{{ $contact->twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    {{-- <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
                 </ul>
             </div>
         </div>

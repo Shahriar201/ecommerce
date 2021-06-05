@@ -8,18 +8,18 @@
                 <div class="left-top-bar">
                     <div class="left-top-bar">
                         <font size="3px" color="#fff">
-                            01928511049 &nbsp;&nbsp;&nbsp; asadullahkpi@gmail.com
+                            {{ $contact->mobile_no }} &nbsp;&nbsp;&nbsp; {{ $contact->email }}
                         </font>
                     </div>
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
                     <ul class="social">
-                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li class="facebook"><a href="{{ $contact->facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li class="google-plus"><a href="{{ $contact->twitter }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="youtube"><a href="{{ $contact->youtube }}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                        <li class="twitter"><a href="{{ $contact->twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        {{-- <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,7 @@
 
                 <!-- Logo desktop -->
                 <a href="{{ url('') }}" class="logo">
-                    <img src="{{ asset('public/frontend') }}/images/logo/logo.png" alt="IMG-LOGO">
+                    <img src="{{ url('public/upload/logo_images/'.$logo->image) }}" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
@@ -72,7 +72,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="{{ url('') }}"><img src="{{ asset('public/frontend') }}/images/logo/logo.png" alt="IMG-LOGO"></a>
+            <a href="{{ url('') }}"><img src="{{ url('public/upload/logo_images/'.$logo->image) }}" alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -96,7 +96,7 @@
             <li>
                 <div class="left-top-bar">
                     <font size="3px" color="#fff">
-                        01928511049 &nbsp;&nbsp;&nbsp; asadullahkpi@gmail.com
+                        {{ $contact->mobile_no }} &nbsp;&nbsp;&nbsp; {{ $contact->email }}
                     </font>
                 </div>
             </li>
@@ -104,11 +104,11 @@
             <li>
                 <div class="right-top-bar flex-w h-full">
                     <ul class="social">
-                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li class="facebook"><a href="{{ $contact->facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li class="google-plus"><a href="{{ $contact->twitter }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="youtube"><a href="{{ $contact->youtube }}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                        <li class="twitter"><a href="{{ $contact->twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        {{-- <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
                     </ul>
                 </div>
             </li>

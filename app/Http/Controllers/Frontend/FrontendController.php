@@ -9,6 +9,7 @@ use App\Model\Slider;
 use App\Model\Contact;
 use App\Model\About;
 use App\Model\Communicate;
+use App\Model\Product;
 use Mail;
 
 class FrontendController extends Controller
@@ -17,6 +18,11 @@ class FrontendController extends Controller
         $data['logo'] = Logo::first();
         $data['sliders'] = Slider::all();
         $data['contact'] = Contact::first();
+
+        $data['categories'] = Product::select('category_id')->groupBy('category_id')->get();
+        $data['brands'] = Product::select('brand_id')->groupBy('brand_id')->get();
+        // dd($data['categories']->toArray());
+        $data['products'] = Product::orderBy('id', 'desc')->paginate(8);
 
         return view('frontend.layouts.home', $data);
     }

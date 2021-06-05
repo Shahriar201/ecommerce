@@ -141,7 +141,7 @@ class ProductController extends Controller
                     $subImage = ProductSubImage::where('product_id', $id)->get()->toArray();
                     foreach ($subImage as $value) {
                         if (!empty($value)) {
-                            unlink('public/upload/product_images/product_sub_images'.$value['sub_image']);
+                            unlink('public/upload/product_images/product_sub_images/'.$value['sub_image']);
                         }
                     }
                     ProductSubImage::where('product_id', $id)->delete();

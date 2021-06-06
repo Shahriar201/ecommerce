@@ -23,6 +23,7 @@ Route::get('/shopping-cart', 'Frontend\FrontendController@shoppingCart')->name('
 Route::get('/product-list', 'Frontend\FrontendController@productList')->name('products.list');
 Route::get('/product-category/{category_id}', 'Frontend\FrontendController@categoryWiseProduct')->name('category.wise.product');
 Route::get('/product-brand/{brand_id}', 'Frontend\FrontendController@brandWiseProduct')->name('brand.wise.product');
+Route::get('/product-details/{slug}', 'Frontend\FrontendController@productDetails')->name('products.details.info');
 
 
 Auth::routes();

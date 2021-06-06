@@ -10,6 +10,9 @@ use App\Model\Contact;
 use App\Model\About;
 use App\Model\Communicate;
 use App\Model\Product;
+use App\Model\ProductColor;
+use App\Model\ProductSize;
+use App\Model\ProductSubImage;
 use Mail;
 
 class FrontendController extends Controller
@@ -55,6 +58,18 @@ class FrontendController extends Controller
         $data['products'] = Product::where('brand_id', $brand_id)->orderBy('id', 'desc')->get();
 
         return view('frontend.single_pages.brand-wise-product', $data);
+    }
+
+    public function productDetails($slug){
+        $data['logo'] = Logo::first();
+        $data['contact'] = Contact::first();
+        $data['product'] = Product::where('slug', $slug)->first();
+        $data['product_sub_images'] = ProductSubImage::where('product_id', $data['product']->id)->get();
+        $data['product_colors'] = ProductColor::where('product_id', $data['product']->id)->get();
+        $data['product_sizes'] = ProductSize::where('product_id', $data['product']->id)->get();
+        // dd($data['product_sub_images']->toArray());
+
+        return view('frontend.single_pages.product-details', $data);
     }
 
     public function aboutUS(){

@@ -20,6 +20,10 @@ Route::get('about-us', 'Frontend\FrontendController@aboutUs')->name('about.us');
 Route::get('contact-us', 'Frontend\FrontendController@contactUs')->name('contact.us');
 Route::post('/contact/store', 'Frontend\FrontendController@store')->name('contact.store');
 Route::get('/shopping-cart', 'Frontend\FrontendController@shoppingCart')->name('shopping.cart');
+Route::get('/product-list', 'Frontend\FrontendController@productList')->name('products.list');
+Route::get('/product-category/{category_id}', 'Frontend\FrontendController@categoryWiseProduct')->name('category.wise.product');
+Route::get('/product-brand/{brand_id}', 'Frontend\FrontendController@brandWiseProduct')->name('brand.wise.product');
+
 
 Auth::routes();
 

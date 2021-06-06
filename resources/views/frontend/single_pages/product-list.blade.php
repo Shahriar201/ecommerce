@@ -1,10 +1,14 @@
-
 @extends('frontend.layouts.master')
 @section('content')
-	
-	@include('frontend.layouts.slider')
-	
-	<!-- Product -->
+
+    <!-- Banner Section -->
+    <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('public/frontend/images/bg-01.jpg');">
+        <h2 class="ltext-105 cl0 txt-center">
+            Product List
+        </h2>
+    </section>
+    
+    <!-- Product -->
     <section class="bg0 p-t-23 p-b-140">
         <div class="container">
             <div class="flex-w flex-sb-m p-b-52">
@@ -96,8 +100,4 @@
     </section>
 
 
-	<!-- Footer Part -->
 @endsection
-	
-
-	

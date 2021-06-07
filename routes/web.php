@@ -25,6 +25,12 @@ Route::get('/product-category/{category_id}', 'Frontend\FrontendController@categ
 Route::get('/product-brand/{brand_id}', 'Frontend\FrontendController@brandWiseProduct')->name('brand.wise.product');
 Route::get('/product-details/{slug}', 'Frontend\FrontendController@productDetails')->name('products.details.info');
 
+//Shopping Cart
+Route::post('/add-to-cart', 'Frontend\CartController@addtoCart')->name('insert.cart');
+Route::get('/show-cart', 'Frontend\CartController@showCart')->name('show.cart');
+Route::post('/update-cart', 'Frontend\CartController@updateCart')->name('update.cart');
+Route::get('/delete-cart/{rowId}', 'Frontend\CartController@deleteCart')->name('delete.cart');
+
 
 Auth::routes();
 

@@ -6,35 +6,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="{{ asset('public/frontend') }}/images/icons/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/fonts/iconic/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/fonts/linearicons-v1.0.0/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/animate/animate.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/css-hamburgers/hamburgers.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/vendor/animsition/css/animsition.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/select2/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/vendor/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/MagnificPopup/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/vendor/MagnificPopup/magnific-popup.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('public/frontend') }}/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/css/util.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/css/main.css">
+
+    <script src="{{ asset('public/frontend') }}/vendor/jquery/jquery-3.2.1.min.js"></script>
+    {{-- Notify Js --}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+    {{-- Notify CSS --}}
+    <style type="text/css">
+        .notifyjs-corner{
+            z-index: 10000 !important;
+        }
+    </style>
 </head>
 
 <body class="animsition">
 
-	@include('frontend.layouts.header')
+    @include('frontend.layouts.header')
 
-	@yield('content')
+    @yield('content')
 
-	@include('frontend.layouts.footer')
+    @include('frontend.layouts.footer')
 
     <!-- Back to top -->
     <div class="btn-back-to-top" id="myBtn">
         <span class="symbol-btn-back-to-top">
-			<i class="zmdi zmdi-chevron-up"></i>
-		</span>
+            <i class="zmdi zmdi-chevron-up"></i>
+        </span>
     </div>
 
     <!-- Modal1 -->
@@ -44,8 +63,8 @@
         <div class="container">
             <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
                 <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-					<img src="{{ asset('public/frontend') }}/images/icons/icon-close.png" alt="CLOSE">
-				</button>
+                    <img src="{{ asset('public/frontend') }}/images/icons/icon-close.png" alt="CLOSE">
+                </button>
 
                 <div class="row">
                     <div class="col-md-6 col-lg-7 p-b-30">
@@ -55,31 +74,40 @@
                                 <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                                 <div class="slick3 gallery-lb">
-                                    <div class="item-slick3" data-thumb="{{ asset('public/frontend') }}/images/product-detail-01.jpg">
+                                    <div class="item-slick3"
+                                        data-thumb="{{ asset('public/frontend') }}/images/product-detail-01.jpg">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="{{ asset('public/frontend') }}/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                                            <img src="{{ asset('public/frontend') }}/images/product-detail-01.jpg"
+                                                alt="IMG-PRODUCT">
 
-                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('public/frontend') }}/images/product-detail-01.jpg">
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                href="{{ asset('public/frontend') }}/images/product-detail-01.jpg">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
                                     </div>
 
-                                    <div class="item-slick3" data-thumb="{{ asset('public/frontend') }}/images/product-detail-02.jpg">
+                                    <div class="item-slick3"
+                                        data-thumb="{{ asset('public/frontend') }}/images/product-detail-02.jpg">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="{{ asset('public/frontend') }}/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                                            <img src="{{ asset('public/frontend') }}/images/product-detail-02.jpg"
+                                                alt="IMG-PRODUCT">
 
-                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('public/frontend') }}/images/product-detail-02.jpg">
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                href="{{ asset('public/frontend') }}/images/product-detail-02.jpg">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
                                     </div>
 
-                                    <div class="item-slick3" data-thumb="{{ asset('public/frontend') }}/images/product-detail-03.jpg">
+                                    <div class="item-slick3"
+                                        data-thumb="{{ asset('public/frontend') }}/images/product-detail-03.jpg">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="{{ asset('public/frontend') }}/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+                                            <img src="{{ asset('public/frontend') }}/images/product-detail-03.jpg"
+                                                alt="IMG-PRODUCT">
 
-                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('public/frontend') }}/images/product-detail-03.jpg">
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                href="{{ asset('public/frontend') }}/images/product-detail-03.jpg">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
@@ -96,11 +124,12 @@
                             </h4>
 
                             <span class="mtext-106 cl2">
-								$58.79
-							</span>
+                                $58.79
+                            </span>
 
                             <p class="stext-102 cl3 p-t-23">
-                                Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                                Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat
+                                ornare feugiat.
                             </p>
 
                             <!--  -->
@@ -113,12 +142,12 @@
                                     <div class="size-204 respon6-next">
                                         <div class="rs1-select2 bor8 bg0">
                                             <select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Size S</option>
-												<option>Size M</option>
-												<option>Size L</option>
-												<option>Size XL</option>
-											</select>
+                                                <option>Choose an option</option>
+                                                <option>Size S</option>
+                                                <option>Size M</option>
+                                                <option>Size L</option>
+                                                <option>Size XL</option>
+                                            </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
                                     </div>
@@ -132,12 +161,12 @@
                                     <div class="size-204 respon6-next">
                                         <div class="rs1-select2 bor8 bg0">
                                             <select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Red</option>
-												<option>Blue</option>
-												<option>White</option>
-												<option>Grey</option>
-											</select>
+                                                <option>Choose an option</option>
+                                                <option>Red</option>
+                                                <option>Blue</option>
+                                                <option>White</option>
+                                                <option>Grey</option>
+                                            </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
                                     </div>
@@ -150,16 +179,18 @@
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
 
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                name="num-product" value="1">
 
                                             <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
                                         </div>
 
-                                        <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-											Add to cart
-										</button>
+                                        <button
+                                            class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                            Add to cart
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +201,6 @@
         </div>
     </div>
 
-    <script src="{{ asset('public/frontend') }}/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="{{ asset('public/frontend') }}/vendor/animsition/js/animsition.min.js"></script>
     <script src="{{ asset('public/frontend') }}/vendor/bootstrap/js/popper.js"></script>
     <script src="{{ asset('public/frontend') }}/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -182,6 +212,7 @@
                 dropdownParent: $(this).next('.dropDownSelect2')
             });
         })
+
     </script>
     <script src="{{ asset('public/frontend') }}/vendor/daterangepicker/moment.min.js"></script>
     <script src="{{ asset('public/frontend') }}/vendor/daterangepicker/daterangepicker.js"></script>
@@ -190,6 +221,7 @@
     <script src="{{ asset('public/frontend') }}/vendor/parallax100/parallax100.js"></script>
     <script>
         $('.parallax100').parallax100();
+
     </script>
     <script src="{{ asset('public/frontend') }}/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
     <script>
@@ -203,6 +235,7 @@
                 mainClass: 'mfp-fade'
             });
         });
+
     </script>
     <script src="{{ asset('public/frontend') }}/vendor/isotope/isotope.pkgd.min.js"></script>
     <script src="{{ asset('public/frontend') }}/vendor/sweetalert/sweetalert.min.js"></script>
@@ -240,6 +273,7 @@
                 swal(nameProduct, "is added to cart !", "success");
             });
         });
+
     </script>
     <script src="{{ asset('public/frontend') }}/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script>
@@ -256,8 +290,37 @@
                 ps.update();
             })
         });
+
     </script>
     <script src="{{ asset('public/frontend') }}/js/main.js"></script>
+
+    {{-- Javascript data updated notification alert --}}
+    @if (session()->has('success'))
+        <script type="text/javascript">
+            $(function() {
+                $.notify("{{ session()->get('success') }}", {
+                    globalPosition: 'top right',
+                    className: 'success'
+                });
+            });
+
+        </script>
+
+    @endif
+
+    {{-- Javascript error notification alert --}}
+    @if (session()->has('error'))
+        <script type="text/javascript">
+            $(function() {
+                $.notify("{{ session()->get('error') }}", {
+                    globalPosition: 'top right',
+                    className: 'error'
+                });
+            });
+
+        </script>
+
+    @endif
 
 </body>
 

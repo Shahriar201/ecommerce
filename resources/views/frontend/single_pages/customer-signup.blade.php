@@ -34,33 +34,42 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
+                        <form id="login-form" class="form" action="{{ route('signup.store') }}" method="post">
+                            @csrf
+
                             <h3 class="text-center text-info">Signup</h3>
                             <div class="form-group">
                                 <label class="text-info">Full Name:</label><br>
                                 <input type="text" name="name" id="name" class="form-control">
+                                <font color="red">{{ $errors->has('name') ? $errors->first('name') : '' }}</font>
                             </div>
                             <div class="form-group">
                                 <label class="text-info">Email:</label><br>
                                 <input type="email" name="email" id="email" class="form-control">
+                                <font color="red">{{ $errors->has('email') ? $errors->first('email') : '' }}</font>
                             </div>
                             <div class="form-group">
                                 <label class="text-info">Mobile Number:</label><br>
                                 <input type="text" name="mobile" id="mobile" class="form-control">
+                                <font color="red">{{ $errors->has('mobile') ? $errors->first('mobile') : '' }}</font>
                             </div>
                             <div class="form-group">
                                 <label class="text-info">Password:</label><br>
                                 <input type="password" name="password" id="password" class="form-control">
+                                <font color="red">{{ $errors->has('password') ? $errors->first('password') : '' }}
+                                </font>
                             </div>
                             <div class="form-group">
                                 <label class="text-info">Confirm Password:</label><br>
-                                <input type="password" name="confirmation_password" id="confirmation_password" class="form-control">
+                                <input type="password" name="password_confirmation" id="password_confirmation"
+                                    class="form-control">
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="Signup">
-                                <i class="fa fa-user"></i> Have you already account ? <a href="{{ route('customer.login') }}"><span>Login here</span></a>
+                                <i class="fa fa-user"></i> Have you already account ? <a
+                                    href="{{ route('customer.login') }}"><span>Login here</span></a>
                             </div>
-                
+
                         </form>
                     </div>
                 </div>
@@ -68,5 +77,67 @@
         </div>
     </div>
     {{-- /Customer Login Form --}}
+
+    {{-- Javascript signup form validation --}}
+    <script>
+        $(function() {
+
+            $('#login-form').validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    mobile: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 9
+                    },
+                    password_confirmation: {
+                        required: true,
+                        equalTo: '#password'
+                    },
+                },
+                messages: {
+                    name: {
+                        required: "Please enter your full name"
+                    },
+                    mobile: {
+                        required: "Please enter your mobile number"
+                    },
+                    email: {
+                        required: "Please enter a email address",
+                        email: "Please enter a <em>vaild</em> email address"
+                    },
+                    password: {
+                        required: "Please enter a password",
+                        minlength: "Your password must be at least 9 characters or numbers"
+                    },
+                    password_confirmation: {
+                        required: "Please enter confirm password",
+                        equalTo: "Confirm password does not match"
+                    },
+                    //terms: "Please accept our terms"
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+
+    </script>
 
 @endsection

@@ -15,8 +15,10 @@ use App\Model\ProductSize;
 use App\Model\ProductSubImage;
 use App\Model\Size;
 use App\Model\Color;
+use App\User;
 use Mail;
 use Cart;
+use DB;
 
 class CheckoutController extends Controller
 {
@@ -32,5 +34,64 @@ class CheckoutController extends Controller
         $data['contact'] = Contact::first();
 
         return view('frontend.single_pages.customer-signup', $data);
+    }
+
+    public function signupStore(Request $request){
+        DB::transaction(function() use($request){
+            $this->validate($request,[
+                'name' => 'required',
+                'email' => 'required|unique:users,email',
+                'mobile' => ['required', 'unique:users,mobile',
+                'regex:/(^(\+8801|8801|01|008801))[1|2-9]{1}(\d){8}$/'],
+                'password' => 'min:9|required_with:password_confirmation|same:password_confirmation', 'password_confirmation' => 'min:6'
+            ]);
+            $code = rand(0000,9999);
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->mobile = $request->mobile;
+            $user->password = bcrypt($request->password);
+            $user->code = $code;
+            $user->status = '0';
+            $user->user_type = 'customer';
+            $user->save();
+
+            $data = array(
+                'email' => $request->email,
+                'code' => $code
+            );
+
+            Mail::send('frontend.emails.verify-email', $data, function($message) use($data){
+                $message->from('sagarbd767@gmail.com', 'Laravel Ecommerce by Shahriar');
+                $message->to($data['email']);
+                $message->subject('Please verify your email address');
+            });
+
+        });
+        return redirect()->route('email.verify')->with('success', 'Your have successfully signed up. Please verify your email');
+    }
+
+    public function emailVerify(){
+        $data['logo'] = Logo::first();
+        $data['contact'] = Contact::first();
+
+        return view('frontend.single_pages.email-verify', $data);
+    }
+
+    public function verifyStore(Request $request){
+        $this->validate($request,[
+            'email' => 'required',
+            'code' => 'required'
+        ]);
+
+        $checkData = User::where('email', $request->email)->where('code', $request->code)->first();
+        if ($checkData) {
+            $checkData->status = '1';
+            $checkData->save();
+
+            return redirect()->route('customer.login')->with('success', 'Your have successfully verified! Please Login');
+        } else {
+            return redirect()->back()->with('error', 'Sorry! email or verification code does not match');
+        }
     }
 }

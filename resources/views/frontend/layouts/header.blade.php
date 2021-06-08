@@ -58,7 +58,7 @@
                             <a href="{{ route('contact.us') }}">CONTACT US</a>
                         </li>
 
-                        <li><a href="">LOGIN</a></li>
+                        <li><a href="{{ route('customer.login') }}">LOGIN</a></li>
                     </ul>
                 </div>
 
@@ -144,7 +144,7 @@
             <li>
                 <a href="{{ route('contact.us') }}">CONTACT US</a>
             </li>
-            <li><a href="">LOGIN</a></li>
+            <li><a href="{{ route('customer.login') }}">LOGIN</a></li>
         </ul>
     </div>
 

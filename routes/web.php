@@ -40,10 +40,14 @@ Route::post('/verify-store', 'Frontend\CheckoutController@verifyStore')->name('v
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Customer Dashboard
+Route::group(['middleware' => ['auth', 'customer']], function(){
+    Route::get('/dashboard', 'Frontend\DashboardController@dashboard')->name('dashboard');
+});
 
-
-Route::group(['middleware'=>'auth'], function(){
+Route::group(['middleware'=>['auth', 'admin']], function(){
+    // Admin Dashboard
+    Route::get('/home', 'HomeController@index')->name('home');
 
     Route::prefix('users')->group(function(){
 

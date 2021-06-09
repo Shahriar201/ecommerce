@@ -163,6 +163,13 @@ Route::group(['middleware'=>'auth'], function(){
         Route::get('/details/{id}', 'Backend\ProductController@details')->name('products.details');    
     });
     
+    Route::prefix('customers')->group(function(){
+    
+        Route::get('/view', 'Backend\CustomerController@view')->name('customers.view');
+        Route::get('/draft/view', 'Backend\CustomerController@draftView')->name('customers.draft.view');
+        Route::post('/delete', 'Backend\CustomerController@delete')->name('customers.delete');       
+    });
+    
 
 });
 

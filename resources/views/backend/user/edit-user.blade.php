@@ -51,11 +51,11 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="user_type">User Role</label>
-                                        <select name="user_type" id="user_type" class="form-control">
+                                    <label for="role">User Role</label>
+                                        <select name="role" id="role" class="form-control">
                                             <option value="">Select Role</option>
-                                            <option value="Admin" {{ ($editData->user_type=="Admin")?"selected":"" }}>Admin</option>
-                                            <option value="User" {{ ($editData->user_type=="User")?"selected":"" }}>User</option>
+                                            <option value="admin" {{ ($editData->role=="admin")?"selected":"" }}>Admin</option>
+                                            <option value="aser" {{ ($editData->role=="user")?"selected":"" }}>User</option>
                                         </select>
                                </div>  
 

@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function view(){
 
-        $data['allData'] = User::all();
+        $data['allData'] = User::where('user_type', 'admin')->where('status', '1')->get();
         
         return view('backend.user.view-user', $data);
     }
@@ -30,7 +30,8 @@ class UserController extends Controller
         //end data validation
 
         $data = new User();
-        $data->user_type = $request->user_type;
+        $data->user_type = 'admin';
+        $data->role = $request->role;
         $data->name = $request->name;
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
@@ -47,7 +48,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id){
         $data = User::find($id);
-        $data->user_type = $request->user_type;
+        $data->role = $request->role;
         $data->name = $request->name;
         $data->email = $request->email;
         $data->save();

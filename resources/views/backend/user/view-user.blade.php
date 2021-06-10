@@ -61,7 +61,7 @@
 
                                     <tr class="{{ $user->id }}">
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $user->user_type }}</td>
+                                        <td>{{ $user->role }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>

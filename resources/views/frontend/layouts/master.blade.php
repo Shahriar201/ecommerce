@@ -35,9 +35,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
     {{-- Notify CSS --}}
     <style type="text/css">
-        .notifyjs-corner{
+        .notifyjs-corner {
             z-index: 10000 !important;
         }
+
     </style>
 </head>
 
@@ -326,6 +327,22 @@
         </script>
 
     @endif
+    
+    {{-- Realtime Image show using Javascript --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+
+                }
+                reader.readAsDataURL(e.target.files['0']);
+
+            });
+        });
+
+    </script>
 
 </body>
 

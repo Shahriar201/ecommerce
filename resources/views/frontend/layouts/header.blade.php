@@ -62,8 +62,8 @@
                             <li class="active-menu">
                                 <a href="#">ACCOUNTS</a>
                                 <ul class="sub-menu">
-                                    <li><a href="">My Dashboard</a></li>
-                                    <li><a href="">My Profile</a></li>
+                                    <li><a href="{{ route('dashboard') }}">My Profile</a></li>
+                                    <li><a href="{{ route('customer.password.change') }}">Password Change</a></li>
                                     <li><a href="">My Orders</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -170,8 +170,8 @@
                 <li>
                     <a href="">ACCOUTNS</a>
                     <ul class="sub-menu-m">
-                        <li><a href="">My Dashboard</a></li>
-                        <li><a href="">My Profile</a></li>
+                        <li><a href="{{ route('dashboard') }}">My Profile</a></li>
+                        <li><a href="{{ route('customer.password.change') }}">Password Change</a></li>
                         <li><a href="">My Orders</a></li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();

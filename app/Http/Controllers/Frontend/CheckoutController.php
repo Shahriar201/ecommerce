@@ -94,4 +94,8 @@ class CheckoutController extends Controller
             return redirect()->back()->with('error', 'Sorry! email or verification code does not match');
         }
     }
+
+    public function checkOut(){
+        dd('Ok');
+    }
 }

@@ -37,6 +37,7 @@ Route::get('/customer-signup', 'Frontend\CheckoutController@customerSignup')->na
 Route::post('/signup-store', 'Frontend\CheckoutController@signupStore')->name('signup.store');
 Route::get('/email-verify', 'Frontend\CheckoutController@emailVerify')->name('email.verify');
 Route::post('/verify-store', 'Frontend\CheckoutController@verifyStore')->name('verify.store');
+Route::get('/checkout', 'Frontend\CheckoutController@checkOut')->name('customer.checkout');
 
 Auth::routes();
 

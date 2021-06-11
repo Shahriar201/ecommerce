@@ -118,8 +118,14 @@
                                 Shopping</a>
                             &nbsp;&nbsp;
 
-                            <a href="login-check.html"
-                                class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">Checkout</a>
+                            @if (@Auth::user()->id != null)
+                                <a href="{{ route('customer.checkout') }}"
+                                    class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">Checkout</a>
+                            @else
+                                <a href="{{ route('customer.login') }}"
+                                    class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">Checkout</a>
+
+                            @endif
                         </div>
                     </div>
                 </div>

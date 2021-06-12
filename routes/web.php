@@ -38,6 +38,7 @@ Route::post('/signup-store', 'Frontend\CheckoutController@signupStore')->name('s
 Route::get('/email-verify', 'Frontend\CheckoutController@emailVerify')->name('email.verify');
 Route::post('/verify-store', 'Frontend\CheckoutController@verifyStore')->name('verify.store');
 Route::get('/checkout', 'Frontend\CheckoutController@checkOut')->name('customer.checkout');
+Route::post('/checkout-store', 'Frontend\CheckoutController@checkoutStore')->name('customer.checkout.store');
 
 Auth::routes();
 
@@ -48,6 +49,10 @@ Route::group(['middleware' => ['auth', 'customer']], function(){
     Route::post('/customer-update-profile', 'Frontend\DashboardController@updateProfile')->name('customer.update.profile');
     Route::get('/customer-password-change', 'Frontend\DashboardController@passwordChange')->name('customer.password.change');
     Route::post('/customer-password-update', 'Frontend\DashboardController@passwordUpdate')->name('customer.password.update');
+
+    Route::get('/payment', 'Frontend\DashboardController@payment')->name('customer.payment');
+    Route::post('/payment/store', 'Frontend\DashboardController@paymentStore')->name('customer.payment.store');
+    Route::get('/order-list', 'Frontend\DashboardController@orderList')->name('customer.order.list');
 });
 
 Route::group(['middleware'=>['auth', 'admin']], function(){

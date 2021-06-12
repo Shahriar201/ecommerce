@@ -17,6 +17,12 @@ use Mail;
 use App\User;
 use Auth;
 use DB;
+use\App\Model\Shipping;
+use\App\Model\Payment;
+use\App\Model\Order;
+use\App\Model\OrderDetail;
+use Session;
+use Cart;
 
 class DashboardController extends Controller
 {
@@ -81,6 +87,73 @@ class DashboardController extends Controller
         }else{
             return redirect()->back()->with('error', 'Sorry! your current password does not match');
         }
+    }
+
+    public function payment(){
+        $data['logo'] = Logo::first();
+        $data['contact'] = Contact::first();
+
+        return view('frontend.single_pages.customer-payment', $data);
+    }
+    
+    public function paymentStore(Request $request){
+        if ($request->product_id == NULL) {
+            return redirect()->back()->with('message', 'Please add any product');
+        } else {
+            $this->validate($request,[
+                'payment_method' => 'required'
+            ]);
+    
+            if ($request->payment_method== 'Bkash' && $request->transaction_no == NULL) {
+                return redirect()->back()->with('message', 'Please enter your transaction no');
+            }
+            DB::transaction(function() use($request){
+                $payment = new Payment();
+                $payment->payment_method = $request->payment_method;
+                $payment->transaction_no = $request->transaction_no;
+                $payment->save();
+    
+                $order = new Order();
+                $order->user_id = Auth::user()->id;
+                $order->shipping_id = Session::get('shipping_id');
+                $order->payment_id = $payment->id;
+    
+                $order_data = Order::orderBy('id', 'desc')->first();
+                if ($order_data == NULL) {
+                    $firstReg = '0';
+                    $order_no = $firstReg+1;
+                } else {
+                    $order_data = Order::orderBy('id', 'desc')->first()->order_no;
+                    $order_no= $order_data+1;
+                }
+                $order->order_no = $order_no;
+                $order->order_total = $request->order_total;
+                $order->status = '0';
+                $order->save();
+    
+                $contents = Cart::content();
+                foreach ($contents as $content) {
+                    $order_details = new OrderDetail();
+                    $order_details->order_id = $order->id;
+                    $order_details->product_id = $content->id;
+                    $order_details->color_id = $content->options->color_id;
+                    $order_details->size_id = $content->options->size_id;
+                    $order_details->quantity = $content->qty;
+                    $order_details->save();
+                }
+            });
+        }
+        Cart::destroy();
+
+        return redirect()->route('customer.order.list')->with('success', 'Data save successfully');
+        
+    }
+
+    public function orderList(){
+        $data['logo'] = Logo::first();
+        $data['contact'] = Contact::first();
+        $data['orders'] = Order::where('user_id', Auth::user()->id)->get();
+        return view('frontend.single_pages.customer-order', $data);
     }
     
 }

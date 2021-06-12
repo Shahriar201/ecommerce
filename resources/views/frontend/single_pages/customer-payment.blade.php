@@ -16,7 +16,7 @@
     <!-- Title page -->
     <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('public/frontend/images/bg-01.jpg');">
         <h2 class="ltext-105 cl0 txt-center">
-            Shopping Cart
+            Payment Method
         </h2>
     </section>
 
@@ -82,58 +82,74 @@
 
                             @endforeach
 
+                            <tr>
+                                <td colspan="6" style="text-align: center"><strong>Grand Total</strong></td>
+                                <td colspan="2"><strong>{{ $total }} TK</strong></td>
+                            </tr>
+
                         </table>
                     </div>
                 </div>
 
-                <div class="col-md-12 col-lg-12 col-xl-12">
-                    <div class="wrap-table-shopping-cart">
-                        <table class="table-shopping-cart">
-                            <tr class="table_head">
-                                <th class="column-1">
-                                    <h5>What would you like to do next?</h5>
-                                    <p>Choose if you have a discount code or reward points you want to use or would like to
-                                        estimate your delivery cost.</p>
-                                </th>
-                            </tr>
-                            <tr class="table_row">
-                                <td class="column-1">
-                                    <div class="total_area">
-                                        <ul>
-                                            <li>Cart Sub Total <span>{{ $total }} TK</span></li>
-                                            <li>Eco Tax <span>0.00</span> Tk</li>
-                                            <li>Shipping Cost <span>Free</span></li>
-                                            <li>Total <span>{{ $total }} TK</span></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+            </div>
 
-                    <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-                        <div class="flex-w flex-m m-r-20 m-tb-5">
-                            <a href="{{ route('products.list') }}"
-                                class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">Continue
-                                Shopping</a>
-                            &nbsp;&nbsp;
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Select Payment Method</h3>
+                </div>
+                <div class="col-md-4">
 
-                            @if (@Auth::user()->id != NULL && Session::get('shipping_id') == NULL)
-                                <a href="{{ route('customer.checkout') }}"
-                                    class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">Checkout</a>
-                            @elseif (@Auth::user()->id != NULL && Session::get('shipping_id') != NULL)
-                                <a href="{{ route('customer.payment') }}"
-                                    class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">Checkout</a>
-                            @else
-                                <a href="{{ route('customer.login') }}"
-                                    class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">Checkout</a>
-
-                            @endif
+                    {{-- Dismissable error message by bootstrap --}}
+                    @if (Session::get('message'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>{{ Session::get('message') }}</strong>
                         </div>
-                    </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('customer.payment.store') }}">
+                        @csrf
+
+                        @foreach ($contents as $content)
+                            <input type="hidden" name="product_id" value="{{ $content->id }}">
+                        @endforeach
+                        
+                        <input type="hidden" name="order_total" value="{{ $total }}">
+
+                        <select name="payment_method" id="payment_method" class="form-control">
+                            <option value="">Select Payment Type</option>
+                            <option value="Hand Cash">Hand Cash</option>
+                            <option value="Bkash">Bkash</option>
+                        </select>
+                        <font style="color:red">
+                            {{ $errors->has('payment_method') ? $errors->first('payment_method') : '' }}
+                        </font>
+
+                        {{-- Bkash form --}}
+                        <div class="show_field" style="display: none; margin-top: 10px">
+                            <span>Bkash No is: 01689174317</span>
+                            <input type="text" name="transaction_no" class="form-control"
+                                placeholder="write Transaction no">
+                        </div>
+                        <button type="submit"
+                            class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- Bkash transaction form auto show by javascript --}}
+    <script type="text/javascript">
+        $(document).on('change', '#payment_method', function() {
+            var payment_method = $(this).val();
+            if (payment_method == 'Bkash') {
+                $('.show_field').show();
+            } else {
+                $('show_field').hide();
+            }
+        });
+
+    </script>
 
 @endsection

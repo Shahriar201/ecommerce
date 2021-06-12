@@ -19,6 +19,12 @@ use App\User;
 use Mail;
 use Cart;
 use DB;
+use\App\Model\Shipping;
+use\App\Model\Payment;
+use\App\Model\Order;
+use\App\Model\OrderDetail;
+use Auth;
+use Session;
 
 class CheckoutController extends Controller
 {
@@ -96,6 +102,30 @@ class CheckoutController extends Controller
     }
 
     public function checkOut(){
-        dd('Ok');
+        $data['logo'] = Logo::first();
+        $data['contact'] = Contact::first();
+
+        return view('frontend.single_pages.customer-checkout', $data);
+    }
+    
+    public function checkoutStore(Request $request){
+        $this->validate($request,[
+            'name' => 'required',
+            'mobile_no' => ['required',
+            'regex:/(^(\+8801|8801|01|008801))[1|2-9]{1}(\d){8}$/'],
+            'address' => 'required'
+        ]);
+
+        $checkout = new Shipping();
+        $checkout->user_id = Auth::user()->id;
+        $checkout->name = $request->name;
+        $checkout->email = $request->email;
+        $checkout->mobile_no = $request->mobile_no;
+        $checkout->address = $request->address;
+        $checkout->save();
+
+        Session::put('shipping_id', $checkout->id);
+
+        return redirect()->route('customer.payment')->with('success', 'Data inserted successfully');
     }
 }

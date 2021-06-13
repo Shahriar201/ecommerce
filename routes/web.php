@@ -185,6 +185,14 @@ Route::group(['middleware'=>['auth', 'admin']], function(){
         Route::post('/delete', 'Backend\CustomerController@delete')->name('customers.delete');       
     });
     
+    Route::prefix('orders')->group(function(){
+    
+        Route::get('/pending/list', 'Backend\OrderController@pendingList')->name('orders.pending.list');
+        Route::get('/approaved/list', 'Backend\OrderController@approavedList')->name('orders.approaved.list');
+        Route::get('/approaved/details/{id}', 'Backend\OrderController@approavedDetails')->name('orders.approaved.details');
+        Route::post('/delete', 'Backend\OrderController@delete')->name('orders.delete');       
+    });
+    
 
 });
 

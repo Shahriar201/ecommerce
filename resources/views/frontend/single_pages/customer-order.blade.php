@@ -17,7 +17,7 @@
     <!-- Banner Section -->
     <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('public/frontend/images/bg-01.jpg');">
         <h2 class="ltext-105 cl0 txt-center">
-            Customer Order List
+            My Order List
         </h2>
     </section>
 
@@ -36,6 +36,7 @@
                         <tr>
                             <th>Order No</th>
                             <th>Total Amount</th>
+                            <th>Payment</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -45,6 +46,12 @@
                             <tr>
                                 <td># {{ $order->order_no }}</td>
                                 <td>{{ $order->order_total }}</td>
+                                <td>{{ $order['payment']['payment_method'] }}</td>
+
+                                @if ($order['payment']['payment_method'] == 'Bkash')
+                                    (Transcation no : {{ $order['payment']['transaction_no'] }})
+                                @endif
+
                                 <td>
                                     @if ($order->status == '0')
                                         <span style="background:#DD4F42; padding:5px; color:#fff">Not Approaved</span>
@@ -54,7 +61,7 @@
 
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i>Details</a>
+                                    <a href="{{ route('customer.order.details', $order->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i>Details</a>
                                 </td>
                             </tr>
                         @endforeach

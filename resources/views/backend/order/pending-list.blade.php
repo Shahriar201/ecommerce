@@ -78,7 +78,9 @@
 
                                             </td>
                                             <td>
-                                                <a href="{{ route('customer.order.details', $order->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i>Details</a>
+                                                <a title="Approaved" id="approaved" class="btn btn-sm btn-info" href="{{ route('orders.approaved') }}" data-token="{{ csrf_token() }}" data-id="{{ $order->id }}">
+                                                    <i class="fa fa-check"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         

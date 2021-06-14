@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'customer']], function(){
     Route::post('/payment/store', 'Frontend\DashboardController@paymentStore')->name('customer.payment.store');
     Route::get('/order-list', 'Frontend\DashboardController@orderList')->name('customer.order.list');
     Route::get('/order-details/{id}', 'Frontend\DashboardController@orderDetails')->name('customer.order.details');
+    Route::get('/order-print/{id}', 'Frontend\DashboardController@orderPrint')->name('customer.order.print');
 });
 
 Route::group(['middleware'=>['auth', 'admin']], function(){
@@ -190,7 +191,7 @@ Route::group(['middleware'=>['auth', 'admin']], function(){
         Route::get('/pending/list', 'Backend\OrderController@pendingList')->name('orders.pending.list');
         Route::get('/approaved/list', 'Backend\OrderController@approavedList')->name('orders.approaved.list');
         Route::get('/approaved/details/{id}', 'Backend\OrderController@approavedDetails')->name('orders.approaved.details');
-        Route::post('/delete', 'Backend\OrderController@delete')->name('orders.delete');       
+        Route::post('/approaved', 'Backend\OrderController@approaved')->name('orders.approaved');       
     });
     
 

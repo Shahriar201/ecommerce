@@ -315,7 +315,7 @@
 
     </script> --}}
 
-    {{-- Another sweet alert by post method --}}
+    {{-- Another delete sweet alert by post method --}}
     <script type="text/javascript">
         $(document).ready(function() {
             $(document).on('click', '#delete', function() {
@@ -344,6 +344,54 @@
                                 success: function(data) {
                                     swal({
                                             title: "Deleted!",
+                                            type: "success"
+                                        },
+                                        function(isConfirm) {
+                                            if (isConfirm) {
+                                                $('.' + id).fadeOut();
+                                            }
+                                        });
+                                }
+                            });
+                        } else {
+                            swal("Cancelled", "", "error");
+                        }
+                    });
+                return false;
+            })
+        })
+
+    </script>
+    
+    {{-- Product approaved by ajax --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('click', '#approaved', function() {
+                var actionTo = $(this).attr('href');
+                var token = $(this).attr('data-token');
+                var id = $(this).attr('data-id');
+                swal({
+                        title: "Are you sure?",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonClass: 'btn-info',
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: "No",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function(isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: actionTo,
+                                type: 'post',
+                                data: {
+                                    id: id,
+                                    _token: token
+                                },
+                                success: function(data) {
+                                    swal({
+                                            title: "Approved!",
                                             type: "success"
                                         },
                                         function(isConfirm) {

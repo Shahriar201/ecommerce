@@ -29,4 +29,10 @@ class OrderController extends Controller
         $data['order'] = Order::find($id);
         return view('backend.order.approaved-details', $data);
     }
+
+    public function approaved(Request $request){
+        $order = Order::find($request->id);
+        $order->status = '1';
+        $order->save();
+    }
 }

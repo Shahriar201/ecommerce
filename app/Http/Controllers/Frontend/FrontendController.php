@@ -14,6 +14,7 @@ use App\Model\ProductColor;
 use App\Model\ProductSize;
 use App\Model\ProductSubImage;
 use Mail;
+use DB;
 
 class FrontendController extends Controller
 {
@@ -119,5 +120,40 @@ class FrontendController extends Controller
         });
 
         return redirect()->back()->with('success', 'Your message successfully sent');
+    }
+
+    public function findProduct(Request $request){
+        $slug = $request->slug;
+        $data['product'] = Product::where('slug', $slug)->first();
+
+        if ($data['product']) {
+            $data['logo'] = Logo::first();
+            $data['contact'] = Contact::first();
+            $data['product'] = Product::where('slug', $slug)->first();
+            $data['product_sub_images'] = ProductSubImage::where('product_id', $data['product']->id)->get();
+            $data['product_colors'] = ProductColor::where('product_id', $data['product']->id)->get();
+            $data['product_sizes'] = ProductSize::where('product_id', $data['product']->id)->get();
+            // dd($data['product_sub_images']->toArray());
+
+            return view('frontend.single_pages.find-product', $data);
+        } else {
+            return redirect()->back()->with('error', 'Product does not match!');
+        }
+        
+    }
+
+    public function getProduct(Request $request){
+        $slug = $request->slug;
+        $productData = DB::table('products')->where('slug', 'LIKE', '%' .$slug.'%')->get();
+
+        $html = '';
+        $html .= '<div><ul>';
+        if ($productData) {
+            foreach ($productData as $v) {
+                $html .= '<li>'.$v->slug.'</li>';
+            }
+        }
+        $html .= '</ul></div>';
+        return response()->json($html);
     }
 }

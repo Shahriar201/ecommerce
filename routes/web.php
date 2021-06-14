@@ -24,6 +24,8 @@ Route::get('/product-list', 'Frontend\FrontendController@productList')->name('pr
 Route::get('/product-category/{category_id}', 'Frontend\FrontendController@categoryWiseProduct')->name('category.wise.product');
 Route::get('/product-brand/{brand_id}', 'Frontend\FrontendController@brandWiseProduct')->name('brand.wise.product');
 Route::get('/product-details/{slug}', 'Frontend\FrontendController@productDetails')->name('products.details.info');
+Route::post('/find-product', 'Frontend\FrontendController@findProduct')->name('find.product');
+Route::get('/get-product', 'Frontend\FrontendController@getProduct')->name('get.product');
 
 //Shopping Cart
 Route::post('/add-to-cart', 'Frontend\CartController@addtoCart')->name('insert.cart');

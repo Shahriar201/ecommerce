@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use\Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Auth;
 use App\User;
 
@@ -24,7 +24,7 @@ class LoginController extends Controller
         // dd($validData);
         $password_check = password_verify($password, @$validData->password);
         if ($password_check == false) {
-            return redirect()->back()->with('message', 'Email of Password does not match!');
+            return redirect()->back()->with('message', 'Email or Password does not match!');
         }
         if ($validData->status == '0') {
             return redirect()->back()->with('message', 'Sorry! you are not validate yet');

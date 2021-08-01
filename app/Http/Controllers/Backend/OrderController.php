@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use\App\Model\Shipping;
-use\App\Model\Payment;
-use\App\Model\Order;
-use\App\Model\OrderDetail;
+use App\Model\Shipping;
+use App\Model\Payment;
+use App\Model\Order;
+use App\Model\OrderDetail;
 use App\Model\Logo;
 use App\Model\Contact;
 

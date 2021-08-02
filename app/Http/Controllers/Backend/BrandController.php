@@ -8,7 +8,7 @@ use App\Model\Category;
 use App\Model\Brand;
 use DB;
 use Auth;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\BrandRequest;
 
 class BrandController extends Controller
 {

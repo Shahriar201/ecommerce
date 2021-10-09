@@ -19,10 +19,10 @@ use App\User;
 use Mail;
 use Cart;
 use DB;
-// use\App\Model\Shipping;
-// use\App\Model\Payment;
-// use\App\Model\Order;
-// use\App\Model\OrderDetail;
+use App\Model\Shipping;
+use App\Model\Payment;
+use App\Model\Order;
+use App\Model\OrderDetail;
 use Auth;
 use Session;
 

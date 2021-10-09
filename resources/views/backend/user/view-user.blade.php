@@ -71,10 +71,8 @@
                                                 </i>
                                             </a>
                                             <a title="Delete" id="delete" class="btn btn-sm btn-danger" href="{{ route('users.delete') }}" data-token="{{ csrf_token() }}" data-id="{{ $user->id }}">
-                                                <i class="fa fa-trash">
-
-                                                </i>
-                                            </a>
+                                                <i class="fa fa-trash"></i>
+                            
                                         </td>
                                     </tr>
                                         

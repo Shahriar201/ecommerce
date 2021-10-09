@@ -89,7 +89,11 @@
                                     <label for="">Color</label>
                                     <select name="color_id[]" class="form-control select2" multiple>
                                         @foreach ($colors as $color)
-                                            <option value="{{ $color->id }}" {{ (@in_array(['color_id'=>$color->id], $color_array))? "selected" : "" }}>{{ $color->name }}</option>
+                                            <option value="{{ $color->id }}" 
+                                                {{-- {{ (@in_array(['color_id'=>$color->id],$color_array))?"selected":"" }} --}}
+                                                >
+                                                {{ $color->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     <font color="red">{{ ($errors->has('color_id'))?($errors->first('color_id')): '' }}</font>
@@ -99,7 +103,11 @@
                                     <label for="">Size</label>
                                     <select name="size_id[]" class="form-control select2" multiple>
                                         @foreach ($sizes as $size)
-                                            <option value="{{ $size->id }}" {{ (@in_array(['size_id'=>$size->id], $size_array))? "selected" : "" }}>{{ $size->name }}</option>
+                                            <option value="{{ $size->id }}" 
+                                                {{-- {{ (@in_array(['size_id'=>$size->id],$size_array))?"selected":"" }} --}}
+                                                >
+                                                {{ $size->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     <font color="red">{{ ($errors->has('size_id'))?($errors->first('size_id')): '' }}</font>

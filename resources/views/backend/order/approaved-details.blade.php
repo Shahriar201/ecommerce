@@ -49,7 +49,7 @@
                             <table class="text-center mytable" width="100%" border="1">
                                 <tr>
                                     <td width="30%">
-                                        <img src="{{ url('public/upload/logo_images/' . $logo->image) }}" alt="IMG-LOGO">
+                                        <img src="{{ url('public/upload/logo_images/' . $logo->image) }}" style="width: 200px; hight: 250px" alt="IMG-LOGO">
                                     </td>
                                     <td width="40%">
                                         <h4><strong>Furnish Furniture</strong></h4><br/>
